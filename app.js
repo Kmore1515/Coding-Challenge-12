@@ -2,26 +2,27 @@
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
 const clearCanvas = document.getElementById("clearscrn")
+const colorSelector = document.getElementById("colorSelector")
 // Task 2: Configure the JS for Drawing Context
 let drawing = false;
 canvas.addEventListener("mousedown", () => {
-    drawing = true;
-    ctx.beginPath();
+    drawing = true; // Makes the canvas draw when mouse is clicked down
+    ctx.beginPath(); // Starts new line
 });
 
 canvas.addEventListener("mouseup", () => {
-    drawing = false;
+    drawing = false; // Stops the drawing when mouse button is released
 });
 
 canvas.addEventListener("mousemove", (event) => {
     if (drawing) {
-        // Add your drawing logic here
-        ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
-        ctx.stroke();
+        ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop); // This is the logic that makes the line follow the mouse 
+        ctx.stroke(); 
+        ctx.strokeStyle = colorSelector.value;
     }});
-
-function clearScreen() {
+ // Task 4
+function clearScreen() { // Clears the canvas of everything
     ctx.clearRect(0, 0, canvas.clientWidth, canvas.height)
 }
-clearCanvas.addEventListener("click", clearScreen)
+clearCanvas.addEventListener("click", clearScreen) // Makes the Clear button an actual button that functions
 
